@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import loading from '../images/loader.png'
+import loading from '../images/loader.gif'
 
 export default class Spinner extends Component {
     render() {
@@ -19,8 +19,8 @@ export default class Spinner extends Component {
 
         return (
             <div className="d-flex justify-align-center" style={parent}>
-                <img src={loading} alt="Loading" height={"100"} width={"100"} style={{borderRadius: '50%', zIndex: 9999}} />
+                <img src={loading} alt="Loading" style={{zIndex: 9999, borderRadius: '110px'}} />
             </div>
-        )
+        );
     }
 }
