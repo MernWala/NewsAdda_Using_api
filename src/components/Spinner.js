@@ -18,7 +18,7 @@ export default class Spinner extends Component {
         }
 
         return (
-            <div className="d-flex justify-align-center" style={parent}>
+            <div className="d-flex justify-align-center sm-w-25" style={parent}>
                 <img src={loading} alt="Loading" style={{zIndex: 9999, borderRadius: '110px'}} />
             </div>
         );

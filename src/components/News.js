@@ -4,13 +4,18 @@ import Spinner from './Spinner';
 
 export default class News extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             artical: [],
             loading: false,
             page: 1
         }
+        document.title = `News Adda | ${this.capitilize(this.props.category)}`;
+    }
+
+    capitilize = (str) => {
+        return str.charAt(0).toUpperCase() + str.substr(1);
     }
 
     async updateNews(){
@@ -48,7 +53,7 @@ export default class News extends Component {
                     <button disabled={this.state.page + 1 > Math.ceil(this.state.totalResults / this.props.pageSize)} className='btn btn-sm btn-dark' onClick={this.handleNextBtn}>Next &rarr;</button>
                 </div>
 
-                <h2 className='text-center'>News Adda - Top headline</h2>
+                <h2 className='text-center customHeading'>Top {this.capitilize(this.props.category)} Headline </h2>
                 <div className='row my-4'>
                     {!this.state.loading && this.state.artical.map((ele) => {
                         return <div className='col-md-4 col-l-4' key={ele.url}>
