@@ -3,14 +3,15 @@ import Navbar from './components/Navbar'
 import News from './components/News'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 export default class App extends Component {
-  pageSize = 6;
+  pageSize = 5;
+  
   render() {
     return (
       <div>
         <BrowserRouter>
           <Navbar />
           <Routes>
-          <Route path="/" element={<News key="home" pageSize={this.pageSize} country="in" category="general" />} />
+            <Route path="/" element={<News key="home" pageSize={this.pageSize} country="in" category="general" />} />
             <Route path="/sports" element={<News key="sports" pageSize={this.pageSize} country="in" category="sports" />} />
             <Route path="/business" element={<News key="business" pageSize={this.pageSize} country="in" category="business" />} />
             <Route path="/entertainment" element={<News key="entertainment" pageSize={this.pageSize} country="in" category="entertainment" />} />
