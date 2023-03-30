@@ -9,7 +9,6 @@ const News = (props) => {
     const [Loading, setLoading] = useState(true);
     const [Page, setPage] = useState(1);
     const [TotalResult, setTotalResult] = useState(0);
-    // document.title = `News Adda | ${capitilize(props.category)}`;
 
     const capitilize = (str) => {
         return str.charAt(0).toUpperCase() + str.substr(1);
@@ -19,30 +18,26 @@ const News = (props) => {
         props.setProgress(0);
         const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&pageSize=${props.pageSize}&apiKey=${props.apiKey}&page=${Page}&category=${props.category}`;
         setLoading(true);
-        props.setProgress(30)
         let data = await fetch(url);
+        props.setProgress(30)
         let parsedData = await data.json();
         props.setProgress(70)
-
         setArtical(parsedData.articles)
         setTotalResult(parsedData.totalResults)
         setLoading(false)
-        setPage()
-
         props.setProgress(100)
     }
 
     useEffect(() => {
         updateNews();
-    }, [])
+    }, [])  
 
 
     const fetchMoreData = async () => {
+        const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&pageSize=${props.pageSize}&apiKey=${props.apiKey}&page=${Page+1}&category=${props.category}`;
         setPage(Page + 1);
-        const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&pageSize=${props.pageSize}&apiKey=${props.apiKey}&page=${Page}&category=${props.category}`;
         let data = await fetch(url);
         let parsedData = await data.json();
-        
         setArtical(Artical.concat(parsedData.articles))
         setTotalResult(parsedData.totalResults)
         setLoading(false)
@@ -50,7 +45,7 @@ const News = (props) => {
 
     return (
         <>
-            <h2 className='text-center customHeading'>Top {capitilize(props.category)} Headline </h2>
+            <h2 className='text-center customHeading' style={{marginTop: '80px'}}>Top {capitilize(props.category)} Headline </h2>
             {Loading && <Spinner />}
             <InfiniteScroll dataLength={Artical.length} next={fetchMoreData} hasMore={Artical.length !== TotalResult} loader={<Spinner />}>
                 <div className='container'>
